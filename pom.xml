@@ -86,7 +86,8 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>devops</finalName>
 	</build>
-	<finalName>devops</finalName>
+	
 
 </project>
