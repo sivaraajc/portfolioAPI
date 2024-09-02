@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.portfolio.Entity.Portfolio;
 import com.example.portfolio.Repository.PortfolioRepository;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RestController
 @Log4j2
 @RequestMapping(value = "/portfolio")
+@CrossOrigin(origins="*")	
 
 public class PortfolioController {
 
