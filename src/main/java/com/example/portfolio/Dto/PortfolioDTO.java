@@ -8,6 +8,7 @@ public class PortfolioDTO {
 	
 	private Long id;
 	private String name;
+	private String mail;
 	private String message;
 	
 
