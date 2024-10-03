@@ -1,5 +1,6 @@
 package com.example.portfolio.Controller;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,6 +9,8 @@ import com.example.portfolio.Entity.Portfolio;
 import com.example.portfolio.Entity.Resumecount;
 import com.example.portfolio.Repository.PortfolioRepository;
 import com.example.portfolio.Repository.ResumecountRepository;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 
@@ -36,18 +39,19 @@ public class PortfolioController {
 	}
 
 	@PostMapping("/resumeCount")
-	public Resumecount resumeCount() {
-		Resumecount resumeCountEntity = resumecountRepository.findById(1).orElse(new Resumecount());
+	public Resumecount resumeCount(HttpServletRequest request) {
+	    // Create a new Resumecount entity
+	    Resumecount resumeCountEntity = new Resumecount();
+	    resumeCountEntity.setCount(1);  // Since it's a new entry, starting with 1
+	    String clientIpAddress = request.getRemoteAddr();
+	    resumeCountEntity.setIpaddress(clientIpAddress);
+	    Resumecount savedEntity = resumecountRepository.save(resumeCountEntity);
 
-		// Increment the count
-		resumeCountEntity.setCount(resumeCountEntity.getCount() + 1);
+	    log.info("New resume download entry created with ID: {}, Count: {}, and IP Address: {}", 
+	             savedEntity.getId(), savedEntity.getCount(), savedEntity.getIpaddress());
 
-		// Save the updated count back to the database
-		Resumecount updatedEntity = resumecountRepository.save(resumeCountEntity);
-
-		log.info("Resume download count incremented: {}", updatedEntity.getCount());
-
-		// Return the updated entity
-		return updatedEntity;
+	    // Return the newly created entity
+	    return savedEntity;
 	}
+
 }

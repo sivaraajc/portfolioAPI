@@ -17,5 +17,6 @@ public class Resumecount {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private Long count = 0L; 
+	private int count = 0; 
+	private String ipaddress;
 }
